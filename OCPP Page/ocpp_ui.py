@@ -19,7 +19,7 @@ url = 'http://homeassistant.local:8123/api/states/sensor.'
 days = int(date.today().strftime("%d"))
 
 headers = {
-    'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiIyZmI3Nzg3OTEwNDE0NTZkYWNlMzExMWVkYmUxMjhiNyIsImlhdCI6MTY5NzM2Nzg1OSwiZXhwIjoyMDEyNzI3ODU5fQ.05mfSBnhZm0LxBdEZOBEjDU3OKHI7A0iNmecYhznY1Y',
+    'Authorization': 'Bearer TOKEN',
     'content-type': 'application/json'
 }
 

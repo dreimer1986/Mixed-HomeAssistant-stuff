@@ -1,3 +1,14 @@
+- id: ocpp_update
+  alias: OCPP Update
+  description: ''
+  trigger:
+  - platform: time
+    at: 00:00:00
+  condition: []
+  action:
+  - action: shell_command.loadocppcsv
+    data: {}
+  mode: single
 - id: ocppsession1
   alias: OCPP session 1
   trigger:
