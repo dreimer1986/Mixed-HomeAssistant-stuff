@@ -4,6 +4,8 @@ My mixed additions to my How Assistant Setup. These are the more complex ones
 * [GadgetBridge Integration](#gadgetbridge)
 * [OCPP Sensors for charge costs](#ocpp)
 
+The EPaper stuff can be found here: https://github.com/dreimer1986/openePaperLink-Stuff
+
 ### <a name="gadgetbridge"></a>GadgetBridge Integration
 My ... complicated way to get all data from my smart ring into my Home Asisstant Setup.
 
