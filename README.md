@@ -4,7 +4,9 @@ My mixed additions to my How Assistant Setup. These are the more complex ones
 * [GadgetBridge Integration](#gadgetbridge)
 * [OCPP Sensors for charge costs](#ocpp)
 
-The EPaper stuff can be found here: https://github.com/dreimer1986/openePaperLink-Stuff
+The ePaper stuff can be found here: https://github.com/dreimer1986/openePaperLink-Stuff
+
+And YES, the anime backgrounds are no still images, they are animated all over HA: https://github.com/dreimer1986/yourname_card_mod
 
 ### <a name="gadgetbridge"></a>GadgetBridge Integration
 My ... complicated way to get all data from my smart ring into my Home Asisstant Setup.
