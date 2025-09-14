@@ -1,0 +1,33 @@
+  - platform: template
+    sensors:
+      ocpp1_cost:
+        friendly_name: Daniel Kosten
+        unique_id: ocpp1_cost
+        unit_of_measurement: '€'
+        value_template: "{{ (states('sensor.ocpp1_energy') | float * states('input_number.energy_cost') | float) | round(2) }}"
+        device_class: monetary
+        availability_template: "{{ states('sensor.ocpp1_energy') not in ['unavailable', 'unknown'] and states('input_number.energy_cost') not in ['unavailable', 'unknown'] }}"
+      ocpp2_cost:
+        friendly_name: Andere Kosten
+        unique_id: ocpp2_cost
+        unit_of_measurement: '€'
+        value_template: "{{ (states('sensor.ocpp2_energy') | float * states('input_number.energy_cost') | float) | round(2) }}"
+        device_class: monetary
+        availability_template: "{{ states('sensor.ocpp2_energy') not in ['unavailable', 'unknown'] and states('input_number.energy_cost') not in ['unavailable', 'unknown'] }}"
+      ocpp1_prevmon_cost:
+        friendly_name: Daniel Kosten Vormonat
+        unique_id: ocpp1_prevmon_cost
+        unit_of_measurement: '€'
+        value_template: "{{ (states('input_number.ocpp1_last_month') | float * states('input_number.energy_cost') | float) | round(2) }}"
+        device_class: monetary
+        availability_template: "{{ states('input_number.ocpp1_last_month') not in ['unavailable', 'unknown'] and states('input_number.energy_cost') not in ['unavailable', 'unknown'] }}"
+      ocpp2_prevmon_cost:
+        friendly_name: Andere Kosten Vormonat
+        unique_id: ocpp2_prevmon_cost
+        unit_of_measurement: '€'
+        value_template: "{{ (states('input_number.ocpp2_last_month') | float * states('input_number.energy_cost') | float) | round(2) }}"
+        device_class: monetary
+        availability_template: "{{ states('input_number.ocpp2_last_month') not in ['unavailable', 'unknown'] and states('input_number.energy_cost') not in ['unavailable', 'unknown'] }}"
+
+shell_command:
+  loadocppcsv: python ocpp_ui.py

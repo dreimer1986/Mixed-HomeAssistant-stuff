@@ -1,0 +1,54 @@
+  - platform: template
+    sensors:
+      ring_schritte_heute:
+        friendly_name: "Ring Schritte heute"
+        unique_id: ring_schritte_heute
+        unit_of_measurement: "steps"
+        value_template: ""
+      ring_puls:
+        friendly_name: "Ring Puls"
+        unique_id: ring_puls
+        unit_of_measurement: "bpm"
+        value_template: ""
+      ring_spo2:
+        friendly_name: "Ring SpO2"
+        unique_id: ring_spo2
+        unit_of_measurement: "%"
+        value_template: ""
+      ring_stresswert:
+        friendly_name: "Ring Stresswert"
+        unique_id: ring_stresswert
+        value_template: ""
+      ring_blutdruck_systolisch:
+        friendly_name: "Ring systolischer Blutdruck"
+        unique_id: ring_blutdruck_systolisch
+        unit_of_measurement: "mmHg"
+        device_class: "pressure"
+        value_template: ""
+      ring_blutdruck_diastolisch:
+        friendly_name: "Ring diastolischer Blutdruck"
+        unique_id: ring_blutdruck_diastolisch
+        unit_of_measurement: "mmHg"
+        device_class: "pressure"
+        value_template: ""
+      ring_schlafwert:
+        friendly_name: "Ring Schlafwert"
+        unique_id: ring_schlafwert
+        value_template: ""
+      ring_batterie:
+        friendly_name: "Ring Batteriestand"
+        unique_id: ring_batterie
+        unit_of_measurement: "%"
+        device_class: "battery"
+        value_template: ""
+      ring_geraet:
+        friendly_name: "Ring Geräteinformationen"
+        unique_id: ring_geraet
+        value_template: ""
+      ring_benutzer:
+        friendly_name: "Ring Benutzerinformationen"
+        unique_id: ring_benutzer
+        value_template: ""
+
+shell_command:
+  gadgetbridge: python smart_ring.py

@@ -1,0 +1,19 @@
+- id: '1756931726949'
+  alias: GadgetBridge
+  description: ''
+  triggers:
+  - trigger: time_pattern
+    minutes: /5
+  conditions: []
+  actions:
+  - action: notify.mobile_app_pixel_7_pro
+    data:
+      message: command_broadcast_intent
+      data:
+        intent_package_name: nodomain.freeyourgadget.gadgetbridge
+        intent_action: nodomain.freeyourgadget.gadgetbridge.command.TRIGGER_EXPORT
+  - delay: 15
+  - action: shell_command.gadgetbridge
+    metadata: {}
+    data: {}
+  mode: single
