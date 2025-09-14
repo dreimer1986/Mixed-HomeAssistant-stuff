@@ -148,12 +148,77 @@ device_firmware_query = f"SELECT FIRMWARE_VERSION1 FROM DEVICE_ATTRIBUTES ORDER 
 cursor.execute(device_firmware_query)
 temp_fw_ver = cursor.fetchall()
 
-if (temp_fw_ver[0])[0] =='':
+if (temp_fw_ver[0])[0] == '':
     device_firmware = (temp_fw_ver[0])[1]
 else:
     device_firmware = (temp_fw_ver[0])[0]
 
 print("Current device data has been saved. Name: " + str(device_name) + ", Type: " + str(device_type) + ", Manufacturer: " + str(device_manufacturer) + ", Identifier: " + str(device_identifier) + ", Firmware: " + str(device_firmware))
+
+# SQLite query to retrieve the username value and put this into a variable
+user_name_query = f"SELECT NAME FROM USER;"
+cursor.execute(user_name_query)
+try:
+    user_name = cursor.fetchone()[0]
+except:
+    user_name = "None"
+
+# SQLite query to retrieve the birthday value and put this into a variable
+user_birthday_query = f"SELECT BIRTHDAY FROM USER;"
+cursor.execute(user_birthday_query)
+try:
+    user_birthday_datecode = int(cursor.fetchone()[0] or 0)
+except:
+    user_birthday_datecode = 0
+
+user_birthday = datetime.fromtimestamp(user_birthday_datecode /1000).strftime("%d. %B %Y")
+
+# SQLite query to retrieve the gender value and put this into a variable
+user_gender_query = f"SELECT GENDER FROM USER;"
+cursor.execute(user_gender_query)
+try:
+    user_gender_temp = int(cursor.fetchone()[0] or 0)
+except:
+    user_gender_temp = 0
+
+if user_gender_temp == 1:
+    user_gender = 'male'
+else:
+    user_gender = 'female'
+
+# SQLite query to retrieve the user height value and put this into a variable
+user_height_query = f"SELECT HEIGHT_CM FROM USER_ATTRIBUTES ORDER BY _id DESC;"
+cursor.execute(user_height_query)
+try:
+    user_height = int(cursor.fetchone()[0] or 0)
+except:
+    user_height = 0
+
+# SQLite query to retrieve the user weight value and put this into a variable
+user_weight_query = f"SELECT WEIGHT_KG FROM USER_ATTRIBUTES ORDER BY _id DESC;"
+cursor.execute(user_weight_query)
+try:
+    user_weight = int(cursor.fetchone()[0] or 0)
+except:
+    user_weight = 0
+
+# SQLite query to retrieve the user steps goal value and put this into a variable
+user_steps_query = f"SELECT STEPS_GOAL_SPD FROM USER_ATTRIBUTES ORDER BY _id DESC;"
+cursor.execute(user_steps_query)
+try:
+    user_steps = int(cursor.fetchone()[0] or 0)
+except:
+    user_steps = 0
+
+# SQLite query to retrieve the user sleep goal value and put this into a variable
+user_sleep_query = f"SELECT SLEEP_GOAL_MPD FROM USER_ATTRIBUTES ORDER BY _id DESC;"
+cursor.execute(user_sleep_query)
+try:
+    user_sleep = int(cursor.fetchone()[0] or 0)
+except:
+    user_sleep = 0
+
+print("Current user data has been saved: Name: " + str(user_name) + ", Birthday: " + str(user_birthday) + ", Gender: " + str(user_gender) + ", Height: " + str(user_height) + ", Weight: " + str(user_weight) + ", Steps goal: " + str(user_steps) + ", Sleep goal: " + str(user_sleep))
 
 # After all data is extracted, close the connection to the database again
 conn.close()
@@ -162,45 +227,49 @@ conn.close()
 errors = ''
 
 # sensor names
-variable1 = 'ring_schritte_heute'
-variable2 = 'ring_puls'
-variable3 = 'ring_spo2'
-variable4 = 'ring_stresswert'
-variable5 = 'ring_blutdruck_systolisch'
-variable6 = 'ring_blutdruck_diastolisch'
-variable7 = 'ring_schlafwert'
-variable8 = 'ring_batterie'
-variable9 = 'ring_geraet'
+variable1  = 'ring_schritte_heute'
+variable2  = 'ring_puls'
+variable3  = 'ring_spo2'
+variable4  = 'ring_stresswert'
+variable5  = 'ring_blutdruck_systolisch'
+variable6  = 'ring_blutdruck_diastolisch'
+variable7  = 'ring_schlafwert'
+variable8  = 'ring_batterie'
+variable9  = 'ring_geraet'
+variable10 = 'ring_benutzer'
 
-attributes1 = '{"unit_of_measurement": "steps", "state_class": "total_increasing", "friendly_name": "Ring Schritte heute", "icon": "mdi:walk"}'
-attributes2 = '{"unit_of_measurement": "bpm", "state_class": "measurement", "friendly_name": "Ring Puls", "icon": "mdi:heart-pulse"}'
-attributes3 = '{"unit_of_measurement": "%", "state_class": "measurement", "friendly_name": "Ring SpO2", "icon": "mdi:water-plus"}'
-attributes4 = '{"friendly_name": "Ring Stresswert", "icon": "mdi:pulse"}'
-attributes5 = '{"unit_of_measurement": "mmHg", "device_class": "pressure", "friendly_name": "Ring systolischer Blutdruck", "icon": "mdi:heart-pulse"}'
-attributes6 = '{"unit_of_measurement": "mmHg", "device_class": "pressure", "friendly_name": "Ring diastolischer Blutdruck", "icon": "mdi:heart-pulse"}'
-attributes7 = '{"friendly_name": "Ring Schlafwert", "icon": "mdi:sleep"}'
-attributes8 = '{"unit_of_measurement": "%", "state_class": "measurement", "device_class": "battery", "friendly_name": "Ring Batteriestand", "icon": "mdi:battery"}'
-attributes9 = '{"device_name": "' + str(device_name) + '", "device_type": "' + str(device_type) + '", "device_manufacturer": "' + str(device_manufacturer) + '", "device_identifier": "' + str(device_identifier) + '", "device_firmware": "' + str(device_firmware) + '", "friendly_name": "Ring Geräteinformationen", "icon": "mdi:devices"}'
+attributes1  = '{"unit_of_measurement": "steps", "state_class": "total_increasing", "friendly_name": "Ring Schritte heute", "icon": "mdi:walk"}'
+attributes2  = '{"unit_of_measurement": "bpm", "state_class": "measurement", "friendly_name": "Ring Puls", "icon": "mdi:heart-pulse"}'
+attributes3  = '{"unit_of_measurement": "%", "state_class": "measurement", "friendly_name": "Ring SpO2", "icon": "mdi:water-plus"}'
+attributes4  = '{"friendly_name": "Ring Stresswert", "icon": "mdi:pulse"}'
+attributes5  = '{"unit_of_measurement": "mmHg", "device_class": "pressure", "friendly_name": "Ring systolischer Blutdruck", "icon": "mdi:heart-pulse"}'
+attributes6  = '{"unit_of_measurement": "mmHg", "device_class": "pressure", "friendly_name": "Ring diastolischer Blutdruck", "icon": "mdi:heart-pulse"}'
+attributes7  = '{"friendly_name": "Ring Schlafwert", "icon": "mdi:sleep"}'
+attributes8  = '{"unit_of_measurement": "%", "state_class": "measurement", "device_class": "battery", "friendly_name": "Ring Batteriestand", "icon": "mdi:battery"}'
+attributes9  = '{"device_name": "' + str(device_name) + '", "device_type": "' + str(device_type) + '", "device_manufacturer": "' + str(device_manufacturer) + '", "device_identifier": "' + str(device_identifier) + '", "device_firmware": "' + str(device_firmware) + '", "friendly_name": "Ring Geräteinformationen", "icon": "mdi:devices"}'
+attributes10 = '{"user_name": "' + str(user_name) + '", "user_birthday": "' + str(user_birthday) + '", "user_gender": "' + str(user_gender) + '", "user_weight": "' + str(user_weight) + '", "user_height": "' + str(user_height) + '", "user_steps_goal": "' + str(user_steps) + '", "user_sleep_goal": "' + str(user_sleep) + '", "friendly_name": "Ring Benutzerinformationen", "icon": "mdi:account"}'
 
 # Prepare the data
-data1 = '{"state": "' + str(daily_steps) + '", "attributes": ' + attributes1 + '}'
-data1 = data1.replace("'",'"')
-data2 = '{"state": "' + str(current_heart_rate) + '", "attributes": ' + attributes2 + '}'
-data2 = data2.replace("'",'"')
-data3 = '{"state": "' + str(current_spo2) + '", "attributes": ' + attributes3 + '}'
-data3 = data3.replace("'",'"')
-data4 = '{"state": "' + str(current_stress) + '", "attributes": ' + attributes4 + '}'
-data4 = data4.replace("'",'"')
-data5 = '{"state": "' + str(current_bp_systolic) + '", "attributes": ' + attributes5 + '}'
-data5 = data5.replace("'",'"')
-data6 = '{"state": "' + str(current_bp_diastolic) + '", "attributes": ' + attributes6 + '}'
-data6 = data6.replace("'",'"')
-data7 = '{"state": "' + str(current_sleep_score)  + '", "attributes": ' + attributes7 + '}'
-data7 = data7.replace("'",'"')
-data8 = '{"state": "' + str(current_battery_level) + '", "attributes": ' + attributes8 + '}'
-data8 = data8.replace("'",'"')
-data9 = '{"state": "' + str(device_name) + '", "attributes": ' + attributes9 + '}'
-data9 = data9.replace("'",'"')
+data1  = '{"state": "' + str(daily_steps) + '", "attributes": ' + attributes1 + '}'
+data1  = data1.replace("'",'"')
+data2  = '{"state": "' + str(current_heart_rate) + '", "attributes": ' + attributes2 + '}'
+data2  = data2.replace("'",'"')
+data3  = '{"state": "' + str(current_spo2) + '", "attributes": ' + attributes3 + '}'
+data3  = data3.replace("'",'"')
+data4  = '{"state": "' + str(current_stress) + '", "attributes": ' + attributes4 + '}'
+data4  = data4.replace("'",'"')
+data5  = '{"state": "' + str(current_bp_systolic) + '", "attributes": ' + attributes5 + '}'
+data5  = data5.replace("'",'"')
+data6  = '{"state": "' + str(current_bp_diastolic) + '", "attributes": ' + attributes6 + '}'
+data6  = data6.replace("'",'"')
+data7  = '{"state": "' + str(current_sleep_score)  + '", "attributes": ' + attributes7 + '}'
+data7  = data7.replace("'",'"')
+data8  = '{"state": "' + str(current_battery_level) + '", "attributes": ' + attributes8 + '}'
+data8  = data8.replace("'",'"')
+data9  = '{"state": "' + str(device_name) + '", "attributes": ' + attributes9 + '}'
+data9  = data9.replace("'",'"')
+data10 = '{"state": "' + str(user_name) + '", "attributes": ' + attributes10 + '}'
+data10 = data10.replace("'",'"')
 
 # Get data into sensors via API
 r1 = requests.post(url+variable1, data=data1, headers=headers)
@@ -238,3 +307,7 @@ if r8.status_code != 200 and r8.status_code != 201:
 r9 = requests.post(url+variable9, data=data9, headers=headers)
 if r9.status_code != 200 and r9.status_code != 201:
     errors = errors + 'ERROR:' + variable9 + ' - ' + str(r9.status_code)
+
+r10 = requests.post(url+variable10, data=data10, headers=headers)
+if r10.status_code != 200 and r10.status_code != 201:
+    errors = errors + 'ERROR:' + variable10 + ' - ' + str(r10.status_code)
