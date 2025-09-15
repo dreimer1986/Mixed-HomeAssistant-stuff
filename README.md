@@ -1,5 +1,5 @@
 # Mixed-HomeAssistant-stuff
-My mixed additions to my How Assistant Setup. These are the more complex ones
+My mixed additions to my Home Assistant Setup. These are the more complex ones
 
 * [GadgetBridge Integration](#gadgetbridge)
 * [OCPP Sensors for charge costs](#ocpp)
