@@ -16,7 +16,7 @@ My ... complicated way to get all data from my smart ring into my Home Asisstant
 2. Enable the intent features of GadgetBridge under Developer Settings so that you can control the app via HA automations.
 3. Enable the auto export of the database. Here you can send the file to Synology Drive for example. The value on how often is quite irrelevant here as we use intent broadcasts to get the file way more often than this setting would allow.
 4. Move the Python script into your "homeassistant" folder.
-5. Integrate the sensors and automations into your HA installation. Yes, it works without these dummy snsors, but then the sensors are reset to ZERO including the history data on every reboot of HA. Thus these sensors are just here to make the data last after a reboot.
+5. Integrate the sensors and automations into your HA installation. Yes, it works without these dummy sensors, but then the sensors are reset to ZERO including the history data on every reboot of HA. Thus these sensors are just here to make the data last after a reboot.
 6. PROFIT!
 
 <p align="center">
