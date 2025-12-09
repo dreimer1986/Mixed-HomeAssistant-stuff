@@ -1,0 +1,12 @@
+alias: Plex Upload Sync
+description: ""
+triggers:
+  - trigger: state
+    entity_id:
+      - sensor.speedtest_cli_upload
+conditions: []
+actions:
+  - action: shell_command.plexlogin
+    metadata: {}
+    data: {}
+mode: single

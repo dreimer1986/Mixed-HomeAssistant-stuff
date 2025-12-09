@@ -1,92 +1,101 @@
-- id: ocpp_update
-  alias: OCPP Update
-  description: ''
-  trigger:
-  - platform: time
-    at: 00:00:00
-  condition: []
-  action:
-  - action: shell_command.loadocppcsv
-    data: {}
-  mode: single
-- id: ocppsession1
-  alias: OCPP session 1
-  trigger:
-  - platform: state
-    entity_id: sensor.evbox_status_connector
-    to: Available
-  condition:
+alias: Ladekosten des Vormonats
+description: ""
+mode: single
+triggers:
+  - at: "23:59:00"
+    trigger: time
+conditions:
   - condition: template
-    value_template: '{{ trigger.from_state is not none and trigger.from_state.state
-      not in [''unknown'',''unavailable''] }}'
-  - condition: state
-    entity_id: sensor.evbox_id_tag
-    state: 04B36F3AE56280
-  action:
-  - target:
-      entity_id: notify.ocppexport1
-    data_template:
-      message: '{{now().strftime("%d.%m.%Y")}};{{now().strftime("%H:%M:%S")}};{{ states.sensor.evbox_time_session.state}};{{
-        states.sensor.evbox_id_tag.state}};{{ states.sensor.evbox_energy_session.state
-        | round(2)}}'
-    action: notify.send_message
-  - action: shell_command.loadocppcsv
-    data: {}
-  mode: single
-- id: ocppsession2
-  alias: OCPP session 2
-  trigger:
-  - platform: state
-    entity_id: sensor.evbox_status_connector
-    to: Available
-  condition:
-  - condition: template
-    value_template: '{{ trigger.from_state is not none and trigger.from_state.state
-      not in [''unknown'',''unavailable''] }}'
-  - condition: not
-    conditions:
-    - condition: state
-      entity_id: sensor.evbox_id_tag
-      state: 04B36F3AE56280
-  action:
-  - target:
-      entity_id: notify.ocppexport2
-    data_template:
-      message: '{{now().strftime("%d.%m.%Y")}};{{now().strftime("%H:%M:%S")}};{{ states.sensor.evbox_time_session.state}};{{
-        states.sensor.evbox_id_tag.state}};{{ states.sensor.evbox_energy_session.state
-        | round(2)}}'
-    action: notify.send_message
-  - action: shell_command.loadocppcsv
-    data: {}
-  mode: single
-- id: ocpp_csv_load
-  alias: OCPP CSV Load
-  trigger:
-  - platform: homeassistant
-    event: start
-  condition: []
-  action:
-  - delay: 00:01:00
-  - action: shell_command.loadocppcsv
-    data: {}
-- id: ocpp_prev_month
-  alias: Ladekosten des Vormonats
-  description: ''
-  trigger:
-  - platform: time
-    at: '23:59:00'
-  condition:
-  - condition: template
-    value_template: '{{ (now() + timedelta(days=1)).day == 1 }}'
-  action:
+    value_template: "{{ (now() + timedelta(days=1)).day == 1 }}"
+actions:
   - data:
-      value: '{{ states(''sensor.ocpp1_energy'') }}'
+      value: "{{ states('sensor.ocpp1_energy') }}"
     target:
       entity_id: input_number.ocpp1_last_month
     action: input_number.set_value
   - data:
-      value: '{{ states(''sensor.ocpp2_energy'') }}'
+      value: "{{ states('sensor.ocpp2_energy') }}"
     target:
       entity_id: input_number.ocpp2_last_month
     action: input_number.set_value
-  mode: single
+
+
+alias: OCPP CSV Load
+triggers:
+  - event: start
+    trigger: homeassistant
+conditions: []
+actions:
+  - delay: "00:01:00"
+  - action: shell_command.loadocppcsv
+    data: {}
+
+
+alias: OCPP session 1
+mode: single
+triggers:
+  - entity_id: sensor.evbox_status_connector
+    to: Available
+    trigger: state
+conditions:
+  - condition: template
+    value_template: >-
+      {{ trigger.from_state is not none and trigger.from_state.state not in
+      ['unknown','unavailable'] }}
+  - condition: state
+    entity_id: sensor.evbox_id_tag
+    state: 04B36F3AE56280
+actions:
+  - target:
+      entity_id: notify.ocppexport1
+    data_template:
+      message: >-
+        {{now().strftime("%d.%m.%Y")}};{{now().strftime("%H:%M:%S")}};{{
+        states.sensor.evbox_time_session.state}};{{
+        states.sensor.evbox_id_tag.state}};{{
+        states.sensor.evbox_energy_session.state | round(2)}}
+    action: notify.send_message
+  - action: shell_command.loadocppcsv
+    data: {}
+
+
+alias: OCPP session 2
+mode: single
+triggers:
+  - entity_id: sensor.evbox_status_connector
+    to: Available
+    trigger: state
+conditions:
+  - condition: template
+    value_template: >-
+      {{ trigger.from_state is not none and trigger.from_state.state not in
+      ['unknown','unavailable'] }}
+  - condition: not
+    conditions:
+      - condition: state
+        entity_id: sensor.evbox_id_tag
+        state: 04B36F3AE56280
+actions:
+  - target:
+      entity_id: notify.ocppexport2
+    data_template:
+      message: >-
+        {{now().strftime("%d.%m.%Y")}};{{now().strftime("%H:%M:%S")}};{{
+        states.sensor.evbox_time_session.state}};{{
+        states.sensor.evbox_id_tag.state}};{{
+        states.sensor.evbox_energy_session.state | round(2)}}
+    action: notify.send_message
+  - action: shell_command.loadocppcsv
+    data: {}
+
+
+alias: OCPP Update
+description: ""
+triggers:
+  - at: "00:00:00"
+    trigger: time
+conditions: []
+actions:
+  - action: shell_command.loadocppcsv
+    data: {}
+mode: single

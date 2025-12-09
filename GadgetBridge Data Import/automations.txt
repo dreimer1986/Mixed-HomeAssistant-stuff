@@ -1,11 +1,10 @@
-- id: '1756931726949'
-  alias: GadgetBridge
-  description: ''
-  triggers:
+alias: GadgetBridge
+description: ""
+triggers:
   - trigger: time_pattern
     minutes: /5
-  conditions: []
-  actions:
+conditions: []
+actions:
   - action: notify.mobile_app_pixel_7_pro
     data:
       message: command_broadcast_intent
@@ -16,4 +15,4 @@
   - action: shell_command.gadgetbridge
     metadata: {}
     data: {}
-  mode: single
+mode: single
