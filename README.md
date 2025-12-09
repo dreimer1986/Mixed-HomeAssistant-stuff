@@ -48,7 +48,15 @@ And we need a helper in form of a input_number: input_number.energy_cost which n
 ### <a name="plexjellyfin"></a>Plex and Jellyfin Upload sync
 New fiber internet access and a few more ppl on my Plex AND a test with Jellyfin made me think about something... Why not give both streaming services the real maximum upstream I can provide right now? This script and automation combination checks every 10 minutes for the real upstream of the internet connection and sends the value to both serives via API. Works perfectly fine.
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/dreimer1986/Mixed-HomeAssistant-stuff/master/images/PlexJellyfin.png">
+</p>
+
 ### <a name="speedtest"></a>Stable Speedtest
 A set of sensors and a Linux app and you are set for a official CLI app using sensor that does not always give no or wrong results. Load the app from here: https://www.speedtest.net/de/apps/cli and then extract it to /config/3rdparty/speedtest
 
 This one is not my work. I found it here: https://community.simon42.com/t/internetspeed-test-start-mit-hilfe-einer-automation/7108 from djeeens
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/dreimer1986/Mixed-HomeAssistant-stuff/master/images/SpeedTest.png">
+</p>
