@@ -2,53 +2,66 @@ template:
 - sensor:
   - unique_id: ring_schritte_heute
     unit_of_measurement: steps
+    state_class: measurement
     default_entity_id: sensor.ring_schritte_heute
     name: Ring Schritte heute
-    state: ''
+    state: None
+    availability: "{{ is_number(states('sensor.ring_schritte_heute')) }}"
   - unique_id: ring_puls
     unit_of_measurement: bpm
+    state_class: measurement
     default_entity_id: sensor.ring_puls
     name: Ring Puls
-    state: ''
+    state: None
+    availability: "{{ is_number(states('sensor.ring_puls')) }}"
   - unique_id: ring_spo2
     unit_of_measurement: '%'
+    state_class: measurement
     default_entity_id: sensor.ring_spo2
     name: Ring SpO2
-    state: ''
+    state: None
+    availability: "{{ is_number(states('sensor.ring_spo2')) }}"
   - unique_id: ring_stresswert
+    state_class: measurement
     default_entity_id: sensor.ring_stresswert
     name: Ring Stresswert
-    state: ''
+    state: None
+    availability: "{{ is_number(states('sensor.ring_stresswert')) }}"
   - unique_id: ring_blutdruck_systolisch
     unit_of_measurement: mmHg
     device_class: PRESSURE
     default_entity_id: sensor.ring_blutdruck_systolisch
     name: Ring systolischer Blutdruck
-    state: ''
+    state: None
+    availability: "{{ is_number(states('sensor.ring_blutdruck_systolisch')) }}"
   - unique_id: ring_blutdruck_diastolisch
     unit_of_measurement: mmHg
     device_class: PRESSURE
     default_entity_id: sensor.ring_blutdruck_diastolisch
     name: Ring diastolischer Blutdruck
-    state: ''
+    state: None
+    availability: "{{ is_number(states('sensor.ring_blutdruck_diastolisch')) }}"
   - unique_id: ring_schlafwert
+    state_class: measurement
     default_entity_id: sensor.ring_schlafwert
     name: Ring Schlafwert
-    state: ''
+    state: None
+    availability: "{{ is_number(states('sensor.ring_schlafwert')) }}"
   - unique_id: ring_batterie
     unit_of_measurement: '%'
     device_class: BATTERY
     default_entity_id: sensor.ring_batterie
     name: Ring Batteriestand
-    state: ''
+    state: None
+    availability: "{{ is_number(states('sensor.ring_batterie')) }}"
   - unique_id: ring_geraet
     default_entity_id: sensor.ring_geraet
     name: Ring Geräteinformationen
-    state: ''
+    state: None
   - unique_id: ring_benutzer
     default_entity_id: sensor.ring_benutzer
     name: Ring Benutzerinformationen
-    state: ''
+    state: None
 
 shell_command:
   gadgetbridge: python smart_ring.py
