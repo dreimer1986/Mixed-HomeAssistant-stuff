@@ -1,4 +1,4 @@
-alias: Plex Upload Sync
+alias: Plex/Jellyfin Upload Sync
 description: ""
 triggers:
   - trigger: state
