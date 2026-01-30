@@ -5,13 +5,13 @@ template:
     default_entity_id: sensor.ocpp1_energy
     name: Daniel
     state: None
-    availability: "{{ is_number(states('sensor.ocpp1_energy')) }}"
+    availability: "{{ is_number(states('sensor.ocpp1_energy')) and not states('sensor.ocpp1_energy') == 'None' }}"
   - unit_of_measurement: kWh
     device_class: ENERGY
     default_entity_id: sensor.ocpp2_energy
     name: Andere
     state: None
-    availability: "{{ is_number(states('sensor.ocpp2_energy')) }}"
+    availability: "{{ is_number(states('sensor.ocpp2_energy')) and not states('sensor.ocpp2_energy') == 'None' }}"
   - unique_id: ocpp1_cost
     unit_of_measurement: €
     device_class: MONETARY
