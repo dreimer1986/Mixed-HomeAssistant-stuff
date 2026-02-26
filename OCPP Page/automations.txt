@@ -34,18 +34,19 @@ actions:
 alias: OCPP session 1
 description: ""
 triggers:
-  - entity_id: sensor.evbox_status
+  - entity_id: sensor.evbox_status_connector
+    from: Charging
+    to: Available
+    trigger: state
+  - entity_id: sensor.evbox_status_connector
+    from: SuspendedEV
     to: Available
     trigger: state
   - trigger: homeassistant
     event: start
 conditions:
-  - condition: template
-    value_template: >-
-      {{ trigger.from_state is not none and trigger.from_state.state not in
-      ['unknown','unavailable'] }}
   - condition: state
-    entity_id: sensor.evbox_id
+    entity_id: sensor.evbox_transaction_id
     state: 04B36F3AE56280
 actions:
   - target:
@@ -54,7 +55,7 @@ actions:
       message: >-
         {{now().strftime("%d.%m.%Y")}};{{now().strftime("%H:%M:%S")}};{{
         states.sensor.evbox_time_session.state}};{{
-        states.sensor.evbox_id.state}};{{
+        states.sensor.evbox_transaction_id.state}};{{
         states.sensor.evbox_energy_session.state | round(2)}}
     action: notify.send_message
   - action: shell_command.loadocppcsv
@@ -64,20 +65,21 @@ mode: single
 
 alias: OCPP session 2
 triggers:
-  - entity_id: sensor.evbox_status
+  - entity_id: sensor.evbox_status_connector
+    from: Charging
+    to: Available
+    trigger: state
+  - entity_id: sensor.evbox_status_connector
+    from: SuspendedEV
     to: Available
     trigger: state
   - trigger: homeassistant
     event: start
 conditions:
-  - condition: template
-    value_template: >-
-      {{ trigger.from_state is not none and trigger.from_state.state not in
-      ['unknown','unavailable'] }}
   - condition: not
     conditions:
       - condition: state
-        entity_id: sensor.evbox_id
+        entity_id: sensor.evbox_transaction_id
         state: 04B36F3AE56280
 actions:
   - target:
@@ -86,7 +88,7 @@ actions:
       message: >-
         {{now().strftime("%d.%m.%Y")}};{{now().strftime("%H:%M:%S")}};{{
         states.sensor.evbox_time_session.state}};{{
-        states.sensor.evbox_id.state}};{{
+        states.sensor.evbox_transaction_id.state}};{{
         states.sensor.evbox_energy_session.state | round(2)}}
     action: notify.send_message
   - action: shell_command.loadocppcsv
