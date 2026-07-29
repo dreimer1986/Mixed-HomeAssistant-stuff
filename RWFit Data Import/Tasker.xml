@@ -1,0 +1,32 @@
+<TaskerData sr="" dvi="1" tv="6.7.6-beta">
+    <Profile sr="prof2" ve="2">
+        <cdate>1783177959265</cdate>
+        <edate>1785345519648</edate>
+        <flags>8</flags>
+        <id>2</id>
+        <mid0>3</mid0>
+        <nme>RWFit</nme>
+        <Time sr="con0">
+            <fh>-1</fh>
+            <fm>-1</fm>
+            <rep>2</rep>
+            <repval>3</repval>
+            <th>-1</th>
+            <tm>-1</tm>
+        </Time>
+    </Profile>
+    <Task sr="task3">
+        <cdate>1783177973110</cdate>
+        <edate>1783178094509</edate>
+        <id>3</id>
+        <nme>Database Move</nme>
+        <Action sr="act0" ve="7">
+            <code>404</code>
+            <se>false</se>
+            <Str sr="arg0" ve="3">/data/user/0/com.rw.revivalfit/databases/DHouseFit.db</Str>
+            <Str sr="arg1" ve="3">Download/Drive</Str>
+            <Int sr="arg2" val="1"/>
+            <Int sr="arg3" val="1"/>
+        </Action>
+    </Task>
+</TaskerData>

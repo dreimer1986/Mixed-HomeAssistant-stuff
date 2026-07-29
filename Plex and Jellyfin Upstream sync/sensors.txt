@@ -1,2 +1,2 @@
 shell_command:
-  plexlogin: python scripts/plexlogin.py
+  plexlogin: python3 scripts/plexlogin.py

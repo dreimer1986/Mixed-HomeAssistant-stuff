@@ -54,4 +54,4 @@ template:
       | float) | round(2) }}'
 
 shell_command:
-  loadocppcsv: python ocpp_ui.py
+  loadocppcsv: python3 ocpp_ui.py

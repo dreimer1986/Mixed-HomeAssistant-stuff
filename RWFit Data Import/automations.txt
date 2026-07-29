@@ -1,0 +1,23 @@
+- id: '1782916822788'
+  alias: RWFit DB Decrypt
+  description: ''
+  triggers:
+  - trigger: time_pattern
+    minutes: /3
+    hours: '*'
+  - trigger: homeassistant
+    event: start
+  conditions: []
+  actions:
+  - action: shell_command.rwfit_ring
+    metadata: {}
+    data: {}
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 15
+      milliseconds: 0
+  - action: shell_command.rwfit_ring_py
+    metadata: {}
+    data: {}
+  mode: single

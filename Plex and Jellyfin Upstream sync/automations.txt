@@ -1,12 +1,13 @@
-alias: Plex/Jellyfin Upload Sync
-description: ""
-triggers:
+- id: '1765301207503'
+  alias: Plex/Jellyfin Upload Sync
+  description: ''
+  triggers:
   - trigger: state
     entity_id:
-      - sensor.speedtest_cli_upload
-conditions: []
-actions:
+    - sensor.intranet_speedtest_cli_upload
+  conditions: []
+  actions:
   - action: shell_command.plexlogin
     metadata: {}
     data: {}
-mode: single
+  mode: single

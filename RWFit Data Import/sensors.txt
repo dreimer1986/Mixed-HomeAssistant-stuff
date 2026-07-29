@@ -1,0 +1,3 @@
+shell_command:
+  rwfit_ring_py: python3 scripts/rw_smart_ring.py
+  rwfit_ring: python3 scripts/sql_dec.py

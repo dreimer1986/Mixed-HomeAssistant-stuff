@@ -5,6 +5,7 @@ My mixed additions to my Home Assistant Setup. These are the more complex ones
 * [OCPP Sensors for charge costs](#ocpp)
 * [Plex and Jellyfin Upload sync](#plexjellyfin)
 * [Stable Speedtest](#speedtest)
+* [RWFit Integration](#rwfit)
 
 The ePaper stuff can be found here: https://github.com/dreimer1986/openePaperLink-Stuff
 
@@ -60,3 +61,14 @@ This one is not my work. I found it here: https://community.simon42.com/t/intern
 <p align="center">
   <img src="https://raw.githubusercontent.com/dreimer1986/Mixed-HomeAssistant-stuff/master/images/SpeedTest.png">
 </p>
+
+### <a name="rwfit"></a>RWFit Integration
+Very similar to the Gadgetbride version, just with a few more hacks to get what I want...
+
+1. You need your own way to send the most recent database to a location where your Home Assistant can find it. I installed Synology Drive on my phone for that and by that I can easily save the database into my Drive and this folder can be accessed from HA as SMB share, too. Just set it up as Media Share in the HA settings and you can grab the most recent file from there.
+
+2. You need Tasker and a way to get access to "/data/user/0/com.rw.revivalfit/databases/DHouseFit.db" (Yes, I am talking about root here ^^)
+3. Import Tasker.xml to auto move the database into the Drive folder you sync with Home Assistant.
+4. Move the Python script into /homeassistant/scripts and add the sensors and automation accordingly.
+5. The scripts decrypt the database with the super safe password "xX2022" that I decompiled off the app and then move the sensor data into sensors for Home Assistant.
+6. PROFIT!
